@@ -19,13 +19,25 @@ public class TestSharingMap extends TestCase{
         a.put(50., "stringE");
         b = new SharingNavMap<>(a); // copy of original
         c = new SharingNavMap<>(b); // copy of copy
-        System.out.println(a);
     }
 
-    public void testSharingNavMapSharesBaseTree(){
-        String s = "string"; // placeholder to pause on
+    public void testOriginalRetainsAllValuesAfterCopyRemovesElements(){
+        b.remove(20.);
+        assertTrue(a.containsKey(10.));
+        assertTrue(a.containsKey(20.));
+        assertTrue(a.containsKey(30.));
+        assertTrue(a.containsKey(40.));
+        assertTrue(a.containsKey(50.));
+    }
+
+    public void testCopiesDoNotContainRemovedValues() {
+        b.remove(20.);
+        c.remove(40.);
+        assertFalse(b.containsKey(20.));
+        assertFalse(c.containsKey(40.));
         System.out.println(a);
         System.out.println(b);
         System.out.println(c);
+        System.out.println("pass");
     }
 }

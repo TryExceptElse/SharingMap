@@ -393,8 +393,8 @@ public class SharingNavMap
         // is concerned.
         if (removed != null){
             return removed;
-        } else if (k.compareTo(lowerBound) >= 0 &&
-                k.compareTo(upperBound) <= 0){
+        } else if ((lowerBound != null && k.compareTo(lowerBound) >= 0) &&
+                (upperBound != null && k.compareTo(upperBound) <= 0)){
             return baseMap.get(k);
         } else {
             return null;
@@ -417,8 +417,8 @@ public class SharingNavMap
     @Override
     public String toString() {
         return "SharingNavMap{" +
-                "baseMap=" + baseMap +
-                ", changeMap=" + changeMap +
+                "baseMap=" + baseMap + System.identityHashCode(baseMap) +
+                ", changeMap=" + changeMap + System.identityHashCode(changeMap) +
                 ", removedKeys=" + removedKeys +
                 ", lowerBound=" + lowerBound +
                 ", lowerBoundInclusive=" + lowerBoundInclusive +
